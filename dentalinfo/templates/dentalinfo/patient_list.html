@@ -1,0 +1,55 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Patient List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.dentalinfo.add_patient %}
+        <a
+                href="{% url 'dentalinfo_patient_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Patient</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Patient List</h2>
+    {% if perms.dentalinfo.add_patient %}
+        <div class="mobile">
+          <a href="{% url 'dentalinfo_patient_create_urlpattern' %}"
+          class="button button-primary">
+            Create New Patient</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for patient in patient_list %}
+            <li>
+                <a href="{{ patient.get_absolute_url }}">{{ patient }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no patients available.</em></li>
+        {% endfor %}
+    </ul>
+
+{#      {% if is_paginated %}#}
+{#    <ul>#}
+{#      {% if previous_page_url %}#}
+{#        <li>#}
+{#          <a href="{{ previous_page_url }}">#}
+{#            Previous</a>#}
+{#        </li>#}
+{#      {% endif %}#}
+{#      <li>#}
+{#        Page {{ patient_list.number }}#}
+{#        of {{ paginator.num_pages }}#}
+{#      </li>#}
+{#      {% if next_page_url %}#}
+{#        <li>#}
+{#          <a href="{{ next_page_url }}">#}
+{#            Next</a>#}
+{#        </li>#}
+{#      {% endif %}#}
+{#    </ul>#}
+{#  {% endif %}#}
+{% endblock %}

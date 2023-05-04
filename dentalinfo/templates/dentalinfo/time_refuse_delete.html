@@ -1,0 +1,26 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Error Deleting Time
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Time</h2>
+        <p>
+            You may not delete time {{ time }}.  This
+            time is currently assigned to the following
+            appointments:
+        </p>
+
+        <ul>
+            {% for appointment in appointments %}
+            <li><a href="{{ appointment.get_absolute_url }}">{{ appointment }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'dentalinfo_time_list_urlpattern' %}">Time List</a>.
+        </p>
+    </div>
+{% endblock %}

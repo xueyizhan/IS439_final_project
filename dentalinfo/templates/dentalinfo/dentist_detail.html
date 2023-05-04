@@ -1,0 +1,65 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Dentist - {{ dentist }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ dentist }}</h2>
+                <ul class="inline">
+                    {% if perms.dentalinfo.change_dentist %}
+                        <li>
+                          <a href="{{ dentist.get_update_url }}"
+                             class="button button-primary">
+                            Edit Dentist</a></li>
+                    {% endif %}
+                    {% if perms.dentalinfo.delete_dentist %}
+                    <li>
+                      <a href="{{ dentist.get_delete_url }}"
+                         class="button button-primary">
+                        Delete Dentist</a></li>
+                    {% endif %}
+                </ul>
+
+                <section>
+                    <table>
+                        <tr>
+                            <th>First Name:</th>
+                            <td>{{ dentist.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Name:</th>
+                            <td>{{ dentist.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Disambiguator</th>
+                            <td>{{ dentist.disambiguator}}</td>
+                        </tr>
+
+            {#<!--            {% if instructor.disambiguator %}-->#}
+            {#<!--                <tr>-->#}
+            {#<!--                    <th>Disambiguator:</th>-->#}
+            {#<!--                    <td>{{ patient.disambiguator }}</td>-->#}
+            {#<!--                </tr>-->#}
+            {#<!--            {% endif %}-->#}
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Appointments</h3>
+                    <ul>
+                        {% for appointment in appointment_list %}
+                            <li>
+                                <a href="{{ appointment.get_absolute_url }}">{{ appointment }}</a>
+                            </li>
+                        {% empty %}
+                            <li><em>There are currently no appointments for this dentist.</em></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+        </div></div>
+    </article>
+{% endblock %}

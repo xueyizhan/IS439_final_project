@@ -1,0 +1,21 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Delete Dentist
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ dentist.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            dentist {{ dentist }}?
+        </p>
+        <a href="{{ dentist.get_absolute_url }}"
+           class="button button-primary">
+        Cancel</a>
+        <button type="submit" class="button button-primary">Delete Dentist</button>
+    </form>
+{% endblock %}

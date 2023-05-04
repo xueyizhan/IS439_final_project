@@ -1,0 +1,15 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Created New Scheduled Time
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'dentalinfo_time_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Create New Scheduled Time</button>
+    </form>
+{% endblock %}

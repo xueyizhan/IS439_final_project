@@ -1,0 +1,53 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Service - {{ Service }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ service }}</h2>
+{#                <ul class="ezu-button-list">#}
+                <ul class="inline">
+                    {% if perms.dentalinfo.change_service %}
+                        <li>
+                          <a href="{{ service.get_update_url }}"
+                             class="button button-primary">
+                            Edit Service</a></li>
+                    {% endif %}
+                    {% if perms.dentalinfo.delete_service %}
+                        <li>
+                          <a href="{{ service.get_delete_url }}"
+                             class="button button-primary">
+                            Delete Service</a></li>
+                    {% endif %}
+                </ul>
+
+                <section>
+                    <table>
+                        <tr>
+                            <th>Service Type:</th>
+                            <td>{{ service.service_type }}</td>
+                        </tr>
+
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Appointments</h3>
+                    <ul>
+                        {% for appointment in appointment_list %}
+                            <li>
+                                <a href="{{ appointment.get_absolute_url }}">{{ appointment }}</a>
+                            </li>
+                        {% empty %}
+                            <li><em>There are currently no appointments for this service.</em></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </article>
+{% endblock %}

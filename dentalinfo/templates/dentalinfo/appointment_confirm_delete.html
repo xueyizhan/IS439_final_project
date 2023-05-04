@@ -1,0 +1,21 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Delete Appointment
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ appointment.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            appointment {{ appointment }}?
+        </p>
+        <a href="{{ appointment.get_absolute_url }}"
+            class="button button-primary">
+            Cancel</a>
+        <button type="submit" class="button button-primary">Delete Appointment</button>
+    </form>
+{% endblock %}

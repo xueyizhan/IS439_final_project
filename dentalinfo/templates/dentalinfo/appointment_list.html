@@ -1,0 +1,54 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Appointment List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.dentalinfo.add_appointment %}
+      <a href="{% url 'dentalinfo_appointment_create_urlpattern' %}"
+         class="button button-primary">
+        Create New Appointment</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Appointment List</h2>
+    {% if perms.add_appointment %}
+        <div class="mobile">
+          <a href="{% url 'dentalinfo_appointment_create_urlpattern' %}"
+             class="button button-primary">
+            Create Appointment</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for appointment in appointment_list %}
+            <li>
+                <a href="{{ appointment.get_absolute_url }}">{{ appointment }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no appointments available.</em></li>
+        {% endfor %}
+    </ul>
+
+{#      {% if is_paginated %}#}
+{#    <ul>#}
+{#      {% if previous_page_url %}#}
+{#        <li>#}
+{#          <a href="{{ previous_page_url }}">#}
+{#            Previous</a>#}
+{#        </li>#}
+{#      {% endif %}#}
+{#      <li>#}
+{#        Page {{ appointment_list.number }}#}
+{#        of {{ paginator.num_pages }}#}
+{#      </li>#}
+{#      {% if next_page_url %}#}
+{#        <li>#}
+{#          <a href="{{ next_page_url }}">#}
+{#            Next</a>#}
+{#        </li>#}
+{#      {% endif %}#}
+{#    </ul>#}
+{#  {% endif %}#}
+{% endblock %}

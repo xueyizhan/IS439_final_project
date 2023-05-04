@@ -1,0 +1,56 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Service List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.dentalinfo.add_service %}
+        <a
+                href="{% url 'dentalinfo_service_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Service</a>
+    {% endif %}
+{% endblock %}
+
+
+{% block org_content %}
+    <h2>Service List</h2>
+    {% if perms.dentalinfo.add_service %}
+        <div class="mobile">
+          <a href="{% url 'dentalinfo_service_create_urlpattern' %}"
+          class="button button-primary">
+            Create New Service</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for service in service_list %}
+            <li>
+                <a href="{{ service.get_absolute_url }}">{{ service }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no services available.</em></li>
+        {% endfor %}
+    </ul>
+
+      {% if is_paginated %}
+    <ul>
+      {% if previous_page_url %}
+        <li>
+          <a href="{{ previous_page_url }}">
+            Previous</a>
+        </li>
+      {% endif %}
+      <li>
+        Page {{ service_list.number }}
+        of {{ paginator.num_pages }}
+      </li>
+      {% if next_page_url %}
+        <li>
+          <a href="{{ next_page_url }}">
+            Next</a>
+        </li>
+      {% endif %}
+    </ul>
+  {% endif %}
+{% endblock %}

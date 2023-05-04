@@ -1,0 +1,63 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Patient - {{ patient }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+                <div class="offset-by-two eight columns">
+                    <h2>{{ patient }}</h2>
+                    <ul class="inline">
+                        {% if perms.dentalinfo.change_patient %}
+                            <li>
+                                <a href="{{ patient.get_update_url }}"
+                                   class="button button-primary">
+                                    Edit Patient</a></li>
+                        {% endif %}
+                        {% if perms.dentalinfo.delete_patient %}
+                            <li>
+                                <a href="{{ patient.get_delete_url }}"
+                                   class="button button-primary">
+                                    Delete Patient</a></li>
+                        {% endif %}
+                    </ul>
+
+                <section>
+                    <table>
+                        <tr>
+                            <th>First Name:</th>
+                            <td>{{ patient.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Name:</th>
+                            <td>{{ patient.last_name }}</td>
+                        </tr>
+
+                        {% if instructor.disambiguator %}
+                            <tr>
+                                <th>Disambiguator:</th>
+                                <td>{{ patient.disambiguator }}</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                </section>
+
+                <div>
+                    <h3>Appointments</h3>
+                    <ul>
+                        {% for appointment in appointment_list %}
+                            <li>
+                                <a href="{{ appointment.get_absolute_url }}">{{ appointment }}</a>
+                            </li>
+                        {% empty %}
+                            <li><em>There are currently no appointments for this patient.</em></li>
+                        {% endfor %}
+                    </ul>
+{#                </div>#}
+{#            </div>#}
+        </section>
+        </div></div>
+    </article>
+{% endblock %}

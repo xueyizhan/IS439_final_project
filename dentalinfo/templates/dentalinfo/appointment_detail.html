@@ -1,0 +1,50 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Appointment - {{ appointment }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ appointment }}</h2>
+                <ul class="inline">
+                    {% if perms.dentalinfo.change_appointment %}
+                        <li>
+                          <a href="{{ appointment.get_update_url }}"
+                             class="button button-primary">
+                            Edit Appointment</a></li>
+                    {% endif %}
+                    {% if perms.dentalinfo.delete_appointment %}
+                        <li>
+                          <a href="{{ appointment.get_delete_url }}"
+                             class="button button-primary">
+                            Delete Appointment</a></li>
+                    {% endif %}
+                </ul>
+
+                <section>
+                    <table>
+                        <tr>
+                            <th>Patient:</th>
+                            <td><a href="{{ appointment.patient.get_absolute_url }}">{{ appointment.patient }}</a></td>
+                        </tr>
+                        <tr>
+                            <th>Service:</th>
+                            <td><a href="{{ appointment.service.get_absolute_url }}">{{ appointment.service }}</a></td>
+                        </tr>
+                        <tr>
+                            <th>Dentist:</th>
+                            <td><a href="{{ appointment.dentist.get_absolute_url }}">{{ appointment.dentist }}</a></td>
+                        </tr>
+                        <tr>
+                            <th>Time:</th>
+                            <td><a href="{{ appointment.time.get_absolute_url }}">{{ appointment.time }}</a></td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </article>
+{% endblock %}

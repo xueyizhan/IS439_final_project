@@ -1,0 +1,15 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Create Service
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'dentalinfo_service_create_urlpattern' %}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class = 'button button-primary'>Create Service</button>
+    </form>
+{% endblock %}

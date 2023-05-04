@@ -1,0 +1,26 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Error Deleting Patient
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Patient</h2>
+        <p>
+            You may not delete patient {{ patient }}.  This
+            patient is currently assigned to the following
+            appointments:
+        </p>
+
+        <ul>
+            {% for appointment in appointments %}
+            <li><a href="{{ appointment.get_absolute_url }}">{{ appointment }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'dentalinfo_patient_list_urlpattern' %}">Patient List</a>.
+        </p>
+    </div>
+{% endblock %}

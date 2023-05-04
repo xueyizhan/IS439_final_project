@@ -1,0 +1,55 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Dentist List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.dentalinfo.add_dentist %}
+        <a
+                href="{% url 'dentalinfo_dentist_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Dentist</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Dentist List</h2>
+    {% if perms.dentalinfo.add_dentist %}
+        <div class="mobile">
+          <a href="{% url 'dentalinfo_dentist_create_urlpattern' %}"
+          class="button button-primary">
+            Create New Dentist</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for dentist in dentist_list %}
+            <li>
+                <a href="{{ dentist.get_absolute_url }}">{{ dentist }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no dentists available.</em></li>
+        {% endfor %}
+    </ul>
+
+      {% if is_paginated %}
+    <ul>
+      {% if previous_page_url %}
+        <li>
+          <a href="{{ previous_page_url }}">
+            Previous</a>
+        </li>
+      {% endif %}
+      <li>
+        Page {{ dentist_list.number }}
+        of {{ paginator.num_pages }}
+      </li>
+      {% if next_page_url %}
+        <li>
+          <a href="{{ next_page_url }}">
+            Next</a>
+        </li>
+      {% endif %}
+    </ul>
+  {% endif %}
+{% endblock %}

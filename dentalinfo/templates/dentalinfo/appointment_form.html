@@ -1,0 +1,15 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Created Appointment
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'dentalinfo_appointment_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Create New Appointment</button>
+    </form>
+{% endblock %}

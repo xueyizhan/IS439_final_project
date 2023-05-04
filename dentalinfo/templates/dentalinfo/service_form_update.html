@@ -1,0 +1,15 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Update Service
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ service.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Service</button>
+    </form>
+{% endblock %}

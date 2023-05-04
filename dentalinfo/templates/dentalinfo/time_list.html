@@ -1,0 +1,33 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Time List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.dentalinfo.add_time %}
+      <a href="{% url 'dentalinfo_time_create_urlpattern' %}"
+         class="button button-primary">
+        Create New Time</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Scheduled Time List</h2>
+    {% if perm.dentalinfo.add_time %}
+        <div class="mobile">
+          <a href="{% url 'dentalinfo_time_create_urlpattern' %}"
+             class="button button-primary">
+            Create New Schedule Time</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for time in time_list %}
+            <li>
+                <a href="{{time.get_absolute_url }}">{{ time }}</a>
+            </li>
+        {% empty %}
+            <li><em>There is currently no scheduled time available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

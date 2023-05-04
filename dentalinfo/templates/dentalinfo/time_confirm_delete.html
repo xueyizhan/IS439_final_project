@@ -1,0 +1,21 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Delete Time
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ time.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            time {{ time }}?
+        </p>
+        <a href="{{ time.get_absolute_url }}"
+            class="button button-primary">
+            Cancel</a>
+        <button type="submit" class="button button-primary">Delete Time</button>
+    </form>
+{% endblock %}

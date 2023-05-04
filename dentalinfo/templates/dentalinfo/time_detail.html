@@ -1,0 +1,63 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Time - {{ time }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ time }}</h2>
+                <ul class="inline">
+                    {% if perms.dentalinfo.change_time %}
+                        <li>
+                          <a href="{{ time.get_update_url }}"
+                             class="button button-primary">
+                            Edit Time</a></li>
+                    {% endif %}
+                    {% if perms.dentalinfo.delete_time %}
+                        <li>
+                          <a href="{{ time.get_delete_url }}"
+                             class="button button-primary">
+                            Delete Time</a></li>
+                    {% endif %}
+                </ul>
+
+                <section>
+                    <table>
+                        <tr>
+                            <th>Year:</th>
+                            <td>{{ time.year }}</td>
+                        </tr>
+                        <tr>
+                            <th>Month:</th>
+                            <td>{{ time.month }}</td>
+                        </tr>
+                        <tr>
+                            <th>Day:</th>
+                            <td>{{ time.day }}</td>
+                        </tr>
+                        <tr>
+                            <th>Hour:</th>
+                            <td>{{ time.hour }}</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Appointments</h3>
+                    <ul>
+                        {% for appointment in appointment_list %}
+                            <li>
+                                <a href="{{ appointment.get_absolute_url }}">{{ appointment }}</a>
+                            </li>
+                        {% empty %}
+                            <li><em>There are currently no appointments for this time.</em></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </article>
+{% endblock %}

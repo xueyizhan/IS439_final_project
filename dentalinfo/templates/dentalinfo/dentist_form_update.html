@@ -1,0 +1,15 @@
+{% extends 'dentalinfo/base.html' %}
+
+{% block title %}
+    Update Dentist
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ dentist.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Dentist</button>
+    </form>
+{% endblock %}
